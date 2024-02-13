@@ -1,0 +1,66 @@
+﻿@using WepPha2.Interfaces;
+@using WepPha2.Repository;
+@using WepPha2.ViewModels
+@model Dictionary<int,int>
+
+@inject IMedicineRepository medrep
+
+@{
+    var medicineDetails = await medrep.GetMedicineDetails(@Model);
+    var finalPrice = medicineDetails.Sum(details => details.TotalPrice);
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <h2>Cart List</h2>
+        <ul class="list-group">
+            @for(int i =0; i< @Model.Count; i++)
+            {
+                <form asp-controller="PurchaseDetails" asp-action="UpdateCount" method="post">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>ID:</strong>  @Model.ElementAt(i).Key
+                    </div>
+                    <div>
+                   
+                        <div>
+                            <strong>Name:</strong> @medicineDetails[i].Name
+                        </div>
+                        <div>
+                            <strong>Price:</strong> @medicineDetails[i].BasePrice
+                        </div>
+                        <div>
+                            <strong>Total Price:</strong> @medicineDetails[i].TotalPrice
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <strong>Count:</strong>
+                        <input type="number" name="itemId" value="@Model.ElementAt(i).Key" hidden>
+                        <input type="number" name="count" value="@Model.ElementAt(i).Value">
+                        <button type="submit" class="btn btn-custom-color">Update Count</button>
+                    </div>
+                </li>
+                </form>
+            }
+        </ul>
+        <div>
+            <div>
+                <strong>Total Price: @finalPrice</strong>
+            </div>
+            @*<a type="button" class="btn btn-custom-color" asp-controller="Purchase" name="unitPrice" value="@finalPrice" asp-action="Create" class="btn btn-sm btn-outline-secondary">Register Purchase</a>*@
+            <form asp-controller="Purchase" asp-action="Create" method="post">
+                <input type="hidden" name="unitPrice" value="@finalPrice">
+                <button type="submit" class="btn btn-custom-color">Register Purchase</button>
+            </form>
+            <a type="button" class="btn btn-custom-color" asp-controller="PurchaseDetails" asp-action="CleanCart" class="btn btn-sm btn-outline-secondary">Clean</a>
+        </div>
+    </div>   
+</body>
+</html>

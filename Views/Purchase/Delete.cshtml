@@ -1,0 +1,28 @@
+﻿@model Purchase
+
+
+<h1>Are you sure you want to delete this Purchase?</h1>
+<form method="post" asp-action="Delete" asp-route-id="@Model.PurchaseId" enctype="multipart/form-data">
+    <input type="hidden" value="MedicineId" id="Medicineid" />
+    <div class="form-group">
+        <label asp-for="PurchaseDate">PurchaseDate</label>
+        <input asp-for="PurchaseDate" class="form-control" placeholder="Name" readonly>
+        <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EmployeeId">EmployeeId</label>
+        <input asp-for="EmployeeId" class="form-control" placeholder="Batch number" readonly>
+        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UnitPurchasePrice">Unit Price</label>
+        <input asp-for="UnitPurchasePrice" class="form-control" placeholder="Active Substance" readonly>
+        <span asp-validation-for="UnitPurchasePrice" class="text-danger"></span>
+    </div>
+</form>
+<div class="form-group">
+    <form asp-action="Delete" method="post" asp-route-id="@Model.PurchaseId">
+        <input type="hidden" asp-for="PurchaseId" />
+        <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3" />
+    </form>
+</div>

@@ -1,0 +1,28 @@
+﻿@using WepPha2.ViewModels
+@model CreateUserEmployeeViewModel
+
+<link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+<form method="post" asp-action="CreateUserEmployee" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="EmployeId">Employee Name</label>
+        <select asp-for="EmployeId" class="form-control">
+            <option value="">-- Select Employe --</option>
+            @foreach (var Employe in ViewBag.EmployeeList)
+            {
+                <option value="@Employe.EmployeeId">@Employe.FirstName @Employe.LastName</option>         
+            }
+        </select>
+        <span asp-validation-for="EmployeId" class="text-danger"></span>
+  </div>
+    <div class="form-group">
+        <label asp-for="Password" class="control-label"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ConfirmPassword" class="control-label"></label>
+        <input asp-for="ConfirmPassword" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-custom-color">Submit</button>
+</form>

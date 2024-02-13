@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WepPha2.Models.Purchase>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Purchases List</title>
+    <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <h2>Purchases List</h2>
+        @if (User.IsInRole("user"))
+        {
+            <a asp-controller="PurchaseDetails" asp-action="ViewCart" class="btn btn-custom-color">Create Purchase</a>
+        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Purchase ID</th>
+                    <th>Purchase Date</th>
+                    <th>Employee Name</th>
+                    <th>Unit Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PurchaseId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PurchaseDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                            @Html.DisplayFor(modelItem => item.Employee.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPurchasePrice)
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.PurchaseId" class="btn btn-custom-color">Delete</a>
+                            <a asp-controller="PurchaseDetails" asp-action="Details" asp-route-id="@item.PurchaseId" class="btn btn-custom-color">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+﻿@using WepPha2.ViewModels;
+@model EditPharmacyViewModel
+
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" value="PharmacyId" id="PharmacyId" />
+    <div class="form-group">
+        <label asp-for="Address">Address</label>
+        <input asp-for="Address" class="form-control" placeholder="Address">
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-custom-color">Submit</button>
+</form>

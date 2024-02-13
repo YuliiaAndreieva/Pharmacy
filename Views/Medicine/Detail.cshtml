@@ -1,0 +1,104 @@
+﻿@model Medicine
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="main-container">
+    <nav aria-label="breadcrumb" role="navigation" class="bg-primary text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+               
+                <!--end of col-->
+            </div>
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </nav>
+    <section class="bg-white space-sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 mb-4 mb-sm-0">
+                    <img alt="Image" src="@Model.Image" class="rounded img-fluid" />
+                </div>
+                <!--end of col-->
+                <div class="col-lg-4 d-flex flex-column justify-content-between mr-auto ml-auto">
+                    <div>
+                        <h1 class="mb-2">@Model.MedicineName</h1>
+                        <h2 class="lead mb-3">Batch Number @Model.BatchNumber</h2>
+                        <h2 class="lead mb-3">Supplier @Model.SupplierId</h2>
+                        <div>
+                            <span class="badge badge-secondary mr-3">@Model.Category</span>
+                        </div>
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div><i class="icon-text-document mr-1"></i>ExpiryDate</div>
+                                        <span>@Model.ExpiryDate</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div><i class="icon-edit mr-1"></i>Quantity</div>
+                                        <span>@Model.Quantity</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div><i class="icon-thumbs-up mr-1"></i>UnitsInStock</div>
+                                        <span>@Model.UnitsInStock</span>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!--end of col-->
+            </div>
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </section>
+    <!--end of section-->
+    <section class="space-sm">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-12 col-md-8 col-lg-7">
+                    <h5 class="mb-4">Description</h5>
+                    <article>
+                        @Model.Description
+                    </article>
+                    <hr>
+                    <h5 class="mb-4">Contraindication</h5>
+                    <article>
+                        @Model.Contraindication
+                    </article>
+                    <hr>
+                    <h5 class="mb-4">Active Substance</h5>
+                    <article>
+                        @Model.ActiveSubstance
+                    </article>
+                    <hr>
+                    <h5 class="mb-4">Use Method</h5>
+                    <article>
+                        @Model.UseMethod
+                    </article>
+                </div>
+                <!--end of col-->
+                <div class="col-12 col-md-4">
+
+                    <!-- end card -->
+                   
+                    <!-- end card -->
+                </div>
+                <!--end of col-->
+            </div>
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </section>
+</div>

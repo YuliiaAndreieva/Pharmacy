@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WepPha2.Models.Supplier>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <h2>Supplier List</h2>
+        <a asp-action="Create" class="btn btn-custom-color">Create Supplier</a>
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>@Html.DisplayFor(modelItem => item.CompanyName)</strong>
+                    </div>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@item.SupplierId" class="btn btn-custom-color">Edit</a>
+                        <a asp-action="Detail" asp-route-id="@item.SupplierId" class="btn btn-custom-color">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.SupplierId" class="btn btn-custom-color">Delete</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</body>
+</html>
+
+

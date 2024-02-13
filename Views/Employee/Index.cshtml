@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WepPha2.Models.Employee>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Employee List</title>
+    <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <h2>Employee List</h2>
+        <a asp-action="Create" class="btn btn-custom-color">Create New</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Start date</th>
+                    <th>Address</th>
+                    <th>PharmacyId</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PharmacyId)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.EmployeeId" class="btn btn-custom-color">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-custom-color">Delete</a>
+                           
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

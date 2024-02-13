@@ -1,0 +1,13 @@
+﻿@using WepPha2.ViewModels;
+@model EditCategoryViewModel
+
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" value="CategoryId" id="CategoryId" />
+    <div class="form-group">
+        <label asp-for="CategoryName">Category Name</label>
+        <input asp-for="CategoryName" class="form-control" placeholder="Company Name">
+        <span asp-validation-for="CategoryName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-custom-color">Submit</button>
+</form>

@@ -1,0 +1,11 @@
+﻿@model Category
+
+<link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+<form method="post" asp-action="Create">
+    <div class="form-group">
+        <label asp-for="CategoryName">Category Name</label>
+        <input asp-for="CategoryName" class="form-control" placeholder="Category Name">
+        <span asp-validation-for="CategoryName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-custom-color">Submit</button>
+</form>

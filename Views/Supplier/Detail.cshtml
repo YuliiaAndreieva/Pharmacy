@@ -1,0 +1,45 @@
+﻿@model WepPha2.Models.Supplier
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class="container">
+        <h4>Supplier Details</h4>
+        <hr />
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row" class="col-sm-2">@Html.DisplayNameFor(model => model.CompanyName)</th>
+                    <td class="col-sm-10">@Html.DisplayFor(model => model.CompanyName)</td>
+                </tr>
+                <tr>
+                    <th scope="row">@Html.DisplayNameFor(model => model.MobilePhone)</th>
+                    <td>@Html.DisplayFor(model => model.MobilePhone)</td>
+                </tr>
+                <tr>
+                    <th scope="row">@Html.DisplayNameFor(model => model.EmailAddress)</th>
+                    <td>@Html.DisplayFor(model => model.EmailAddress)</td>
+                </tr>
+                <tr>
+                    <th scope="row">@Html.DisplayNameFor(model => model.Address)</th>
+                    <td>@Html.DisplayFor(model => model.Address)</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-sm-10 offset-sm-2">
+                <a class="btn btn-custom-color" asp-action="Edit" asp-route-id="@Model?.SupplierId">Edit</a>
+                <a class="btn btn-custom-color" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

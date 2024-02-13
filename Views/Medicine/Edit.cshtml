@@ -1,0 +1,96 @@
+﻿@using WepPha2.ViewModels;
+@model EditMedicineViewModel
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" value="MedicineId" id="MedicineId" />
+    <div class="form-group">
+        <label asp-for="MedicineName">Medicine Name</label>
+        <input asp-for="MedicineName" class="form-control" placeholder="Name">
+        <span asp-validation-for="MedicineName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BatchNumber">Batch number</label>
+        <input asp-for="BatchNumber" class="form-control" placeholder="Batch number">
+        <span asp-validation-for="BatchNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ActiveSubstance">Active Substance</label>
+        <input asp-for="ActiveSubstance" class="form-control" placeholder="Active Substance">
+        <span asp-validation-for="ActiveSubstance" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Contraindication">Contraindication</label>
+        <textarea asp-for="Contraindication" class="form-control" placeholder="Contraincidcation"></textarea>
+        <span asp-validation-for="Contraindication" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UnitsInStock">Units in stock</label>
+        <input asp-for="UnitsInStock" class="form-control" placeholder="Units in stock">
+        <span asp-validation-for="UnitsInStock" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ExpiryDate">Expiry Date</label>
+        <input asp-for="ExpiryDate" class="form-control" placeholder="ExpiryDate">
+        <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UnitPrice">UnitPrice</label>
+        <input asp-for="UnitPrice" class="form-control" placeholder="UnitPrice">
+        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>IsOverdued</label>
+        <div class="form-check form-check-inline">
+            <input asp-for="IsOverdued" class="form-check-input" type="radio" id="yesCheckbox" value="true" name="IsOverdued">
+            <label class="form-check-label" asp-for="IsOverdued">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input asp-for="IsOverdued" class="form-check-input" type="radio" id="noCheckbox" value="false" name="IsOverdued">
+            <label class="form-check-label" asp-for="IsOverdued">No</label>
+        </div>
+        <span asp-validation-for="IsOverdued" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SupplierId">Supplier</label>
+        <select asp-for="SupplierId" class="form-control">
+            <option value="">-- Select Supplier --</option>
+            @foreach (var supplier in ViewBag.SupplierList)
+            {
+                <option value="@supplier.SupplierId">@supplier.CompanyName</option>
+            }
+        </select>
+        <span asp-validation-for="SupplierId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId">Category</label>
+        <select asp-for="CategoryId" class="form-control">
+            <option value="">-- Select Category --</option>
+            @foreach (var category in ViewBag.CategoryList)
+            {
+                <option value="@category.CategoryId">@category.CategoryName</option>
+            }
+        </select>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <textarea asp-for="Description" class="form-control" placeholder="Description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UseMethod">UseMethod</label>
+        <textarea asp-for="UseMethod" class="form-control" placeholder="UseMethod"></textarea>
+        <span asp-validation-for="UseMethod" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Quantity">Quantity</label>
+        <input asp-for="Quantity" class="form-control" placeholder="Quantity">
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">Image</label>
+        <input asp-for="Image" type="file" class="form-control" placeholder="Image">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

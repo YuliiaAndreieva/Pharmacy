@@ -1,0 +1,29 @@
+﻿@using WepPha2.ViewModels;
+@model AppUser
+
+
+<h1>Are you sure you want to delete this user?</h1>
+<form method="post" asp-action="Delete" asp-route-id="@Model.Id" enctype="multipart/form-data">
+    <input type="hidden" value="MedicineId" id="Medicineid" />
+    <div class="form-group">
+        <label asp-for="UserName">Company Name</label>
+        <input asp-for="UserName" class="form-control" placeholder="Name">
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber">Mobile Phone</label>
+        <input asp-for="PhoneNumber" class="form-control" placeholder="Name">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email Address</label>
+        <input asp-for="Email" class="form-control" placeholder="Name">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+</form>
+<div class="form-group">
+    <form asp-action="Delete" method="post" asp-route-id="@Model.Id">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Confirm" class="btn btn-custom-color" />
+    </form>
+</div>

@@ -1,0 +1,33 @@
+﻿@model Supplier
+
+
+<h1>Are you sure you want to delete this supplier?</h1>
+<form method="post" asp-action="Delete" asp-route-id="@Model.SupplierId" enctype="multipart/form-data">
+    <input type="hidden" value="MedicineId" id="Medicineid" />
+    <div class="form-group">
+        <label asp-for="CompanyName">Company Name</label>
+        <input asp-for="CompanyName" class="form-control" placeholder="Name">
+        <span asp-validation-for="CompanyName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MobilePhone">Mobile Phone</label>
+        <input asp-for="MobilePhone" class="form-control" placeholder="Name">
+        <span asp-validation-for="MobilePhone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EmailAddress">Email Address</label>
+        <input asp-for="EmailAddress" class="form-control" placeholder="Name">
+        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address">Address</label>
+        <input asp-for="Address" class="form-control" placeholder="Name">
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+</form>
+<div class="form-group">
+    <form asp-action="Delete" method="post" asp-route-id="@Model.SupplierId">
+        <input type="hidden" asp-for="SupplierId" />
+        <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3" />
+    </form>
+</div>

@@ -1,0 +1,11 @@
+﻿@model Pharmacy
+
+<link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+<form method="post" asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Address">Address</label>
+        <input asp-for="Address" class="form-control" placeholder="Address">
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-custom-color">Submit</button>
+</form>

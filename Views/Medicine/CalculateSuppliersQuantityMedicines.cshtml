@@ -1,0 +1,18 @@
+﻿@model IEnumerable<dynamic>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Company name</th>
+            <th>Count of medicines</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var supplierMedicineCount in Model)
+        {
+            <tr>
+                <td>@supplierMedicineCount.SupplierName</td> 
+                <td>@supplierMedicineCount.MedicineCount</td>
+            </tr>
+        }
+    </tbody>
+</table>

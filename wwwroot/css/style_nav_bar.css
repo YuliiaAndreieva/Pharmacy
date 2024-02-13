@@ -1,0 +1,33 @@
+﻿.sidebar {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    padding-top: 20px;
+    height: 100vh;
+    border-radius: 10px;
+}
+
+    .sidebar .nav-link {
+        color: #333;
+    }
+
+    .sidebar .nav-link.active {
+        font-weight: bold;
+        color: #B2C8BA;
+    }
+
+body {
+    background-color: #eaf7e6;
+  
+}
+
+.flex-column {
+    background-color: #D2E3C8;
+    border-radius: 10px;
+
+}
+
+.btn-custom-color {
+    background-color: #86A789;
+    color: #EBF3E8;
+}

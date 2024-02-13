@@ -1,0 +1,26 @@
+﻿@model Supplier
+
+<link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+<form method="post" asp-action="Create">
+    <div class="form-group">
+        <label asp-for="CompanyName">Company Name</label>
+        <input asp-for="CompanyName" class="form-control" placeholder="Company Name">
+        <span asp-validation-for="CompanyName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MobilePhone">Mobile Phone</label>
+        <input asp-for="MobilePhone" class="form-control" placeholder="Mobile Phone">
+        <span asp-validation-for="MobilePhone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EmailAddress">Email address</label>
+        <input asp-for="EmailAddress" class="form-control" placeholder="Email">
+        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address">Address</label>
+        <textarea asp-for="Address" class="form-control" placeholder="Addres"></textarea>
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-custom-color">Submit</button>
+</form>

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<WepPha2.Models.Purchase>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reports List</title>
+    <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <h2>Reports</h2>
+       
+        <a asp-controller="Report" asp-action="CreateMedicineReport" class="btn btn-custom-color">Create Available Medicine Report</a>
+        <a asp-controller="Report" asp-action="CreatePurchaseReport" class="btn btn-custom-color">Create Reqistered Purchase Report</a>
+        <a asp-controller="Report" asp-action="CreateEmployeeReport" class="btn btn-custom-color">Create Employee Report</a>   
+    </div>
+</body>

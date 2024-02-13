@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WepPha2.Models.Category>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <h2>Categories List</h2>
+        <a asp-action="Create" class="btn btn-custom-color">Create category</a>
+        <hr />
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>@Html.DisplayFor(modelItem => item.CategoryName)</strong>
+                    </div>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-custom-color">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-custom-color">Delete</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WepPha2.Models.PurchaseDetails>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <h2>Details of purchase</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Purchase ID</th>
+                    <th>Count</th>
+                    <th>Medicine Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PurchaseId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Count)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PurchasedMedicine.MedicineName)
+                        </td>                       
+                    </tr>                   
+                }
+               
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

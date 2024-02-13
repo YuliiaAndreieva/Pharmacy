@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Medicine>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+</head>
+<h2>Medicine List</h2>
+<div class="btn-group" role="group">
+    <a asp-action="CalculateSuppliersQuantityMedicines" class="btn btn-custom-color">Calculate quantity of medicines</a>
+    <a asp-action="Create" class="btn btn-custom-color">Create Medicine</a>
+</div>
+<form asp-action="Index" method="get">
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label>Select Category</label> 
+                <select class="form-control" name="CategoryId">
+                    <option value="">-- All Categories --</option>
+                    @foreach (var category in ViewBag.CategoryList)
+                    {
+                        <option value="@category.CategoryId">@category.CategoryName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="control-label">Search Medicine name</label>
+                @Html.TextBox("SearchString",null,new {@class ="form-control"})
+            </div>
+            <div class="form-group col-md-4 align-self-end">
+                <input type="submit" name="actionButton" value="Filter" class="btn btn-custom-color" />
+                <a asp-action="Index" class="btn btn-custom-color">Clear</a>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 b0x-shadow">
+                        <img class="card-img-top" src="@item.Image" height="225" alt="Cdrd image cap">
+                        <div class="card-body">
+                            <p class="card-text">@item.MedicineName</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a type="button" class="btn btn-custom-color" asp-controller="Medicine" asp-action="Detail" asp-route-id="@item.MedicineId" class="btn btn-sm btn-outline-secondary">View</a>
+                                    <a type="button" class="btn btn-custom-color" asp-controller="Medicine" asp-action="Edit" asp-route-id="@item.MedicineId" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                    <a type="button" class="btn btn-custom-color" asp-controller="Medicine" asp-action="Delete" asp-route-id="@item.MedicineId" class="btn btn-sm btn-outline-secondary">Delete</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        @if (User.IsInRole("user"))
+                        {
+                            <form asp-action="AddToPurchase" asp-controller="PurchaseDetails" asp-route-id="@item.MedicineId">
+                                <input type="number" name="count" value="@item.Quantity" max="@item.Quantity">
+                                <button type="submit">Add</button>
+                            </form>
+                        }
+                        <div>
+                        <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-body-secondary">Price: @item.UnitPrice</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+</html>
