@@ -6,7 +6,7 @@ namespace WepPha2.Data
 {
     public class Seed
     {
-        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        public static async Task SeedData(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
@@ -18,9 +18,12 @@ namespace WepPha2.Data
                 if (!await roleManager.RoleExistsAsync(UserRoles.User))
                     await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
+                if (!await roleManager.RoleExistsAsync(UserRoles.Manager))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Manager));
+
                 //Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-                string adminUserEmail = "teddysmithdeveloper@gmail.com";
+                /*string adminUserEmail = "teddysmithdeveloper@gmail.com";
 
                 var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
                 if (adminUser == null)
@@ -30,7 +33,7 @@ namespace WepPha2.Data
                         UserName = "yuliaandrew",
                         Email = adminUserEmail,
                         EmailConfirmed = true,
-                        
+
                     };
                     await userManager.CreateAsync(newAdminUser, "Coding@1234?");
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
@@ -46,10 +49,25 @@ namespace WepPha2.Data
                         UserName = "app-user",
                         Email = appUserEmail,
                         EmailConfirmed = true,
-                       
+
                     };
                     await userManager.CreateAsync(newAppUser, "Coding@1234?");
                     await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
+                }*/
+                string appManager1Email = "manager1@gmail.com";
+
+                var appUser = await userManager.FindByEmailAsync(appManager1Email);
+
+                if (appUser == null)
+                {
+                    var newAppUser = new AppUser()
+                    {
+                        UserName = appManager1Email,
+                        Email = appManager1Email,
+                        EmailConfirmed = true,
+                    };
+                    await userManager.CreateAsync(newAppUser, "Coding@1234?");
+                    await userManager.AddToRoleAsync(newAppUser, UserRoles.Manager);
                 }
             }
         }

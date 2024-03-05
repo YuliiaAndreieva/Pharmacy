@@ -3,6 +3,8 @@ using WepPha2.Data;
 using WepPha2.Interfaces;
 using WepPha2.Models;
 using WepPha2.Repository;
+using WepPha2.Services;
+using WepPha2.Services.MailSending;
 using WepPha2.ViewModels;
 
 namespace WepPha2.Controllers
@@ -11,11 +13,19 @@ namespace WepPha2.Controllers
     {
         private readonly IMedicineRepository _medicineRepository;
         private readonly IPhotoService _photoService;
+        private readonly NotificationService _notificationService;
+        //private readonly IObserver _observer;
 
-        public MedicineController(IMedicineRepository medicineRepository, IPhotoService photoService)
+        public MedicineController(
+            IPhotoService photoService,
+            IMedicineRepository medicineRepository,
+            NotificationService notificationService)
+            //IObserver observer)
         {          
             _medicineRepository = medicineRepository;
             _photoService = photoService;
+            _notificationService = notificationService;
+            //_observer = observer;
         }
 
         public async Task<IActionResult> Index(string searchstring, int?CategoryId)

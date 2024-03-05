@@ -7,25 +7,11 @@ namespace WepPha2.Models.DocumentModels
 {
     public class InvoisePurchaseDocument : IDocument
     {
-        //private readonly List<Medicine> _medicines;
         private IEnumerable<Purchase> _purchases;
-
-        //public DocumentMedicinesViewModel Model { get; }
-        ////public IMedicineRepository _medicineRepository { get; set; }
-
-        ////public InvoiceDocument(IMedicineRepository medicineRepository)
-        ////{
-        ////    _medicineRepository = medicineRepository;
-        ////}
-        //public InvoiceDocument(IEnumerable<Medicine> medicines)
-        //{
-        //    _medicines = medicines;
-        //}
 
         public InvoisePurchaseDocument(IEnumerable<Purchase> purchases)
         {
             _purchases = purchases;
-            // _userManager = userManager;
         }
 
         public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
@@ -54,13 +40,6 @@ namespace WepPha2.Models.DocumentModels
             {
                 column.Spacing(20);
                 column.Item().AlignCenter().Text("Reqistered Purchases").FontSize(20).SemiBold();
-                //column.Item().Row(row =>
-                //{
-                //    row.RelativeItem().Component(new AddressComponent("From", Model.SellerAddress));
-                //    row.ConstantItem(50);
-                //    row.RelativeItem().Component(new AddressComponent("For", Model.CustomerAddress));
-                //});
-
                 column.Item().Element(ComposeTable);
 
                 var totalSum = _purchases.Sum(x => x.UnitPurchasePrice);
@@ -113,16 +92,7 @@ namespace WepPha2.Models.DocumentModels
 
             });
         }
-
-        //void ComposeComments(IContainer container)
-        //{
-        //    container.ShowEntire().Background(Colors.Grey.Lighten3).Padding(10).Column(column =>
-        //    {
-        //        column.Spacing(5);
-        //        column.Item().Text("Comments").FontSize(14).SemiBold();
-        //        column.Item().Text(Model.Comments);
-        //    });
-        //}
+        
     }
 
     public class PurchaseListComponent : IComponent

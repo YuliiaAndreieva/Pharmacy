@@ -23,7 +23,8 @@ namespace WepPha2.Controllers
             _employeeRepository = employeeRepository;
         }
 
-        [HttpGet("users")]
+        //[HttpGet("users")]
+        
         public async Task<IActionResult> Index()
         {
             var users = await _userRepository.GetAllUsers();

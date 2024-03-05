@@ -18,5 +18,7 @@ namespace WepPha2.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<PurchaseDetails> PurchaseDetails { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        
+        
     }
 }

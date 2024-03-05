@@ -30,7 +30,8 @@ namespace WepPha2.Repository
 
         public async Task<Supplier> GetSupplierById(int id)
         {
-            return await _context.Suppliers.FirstOrDefaultAsync(i => i.SupplierId == id);
+            var sup=  await _context.Suppliers.FirstOrDefaultAsync(i => i.SupplierId == id);
+            return sup;
         }
         public async Task<Supplier> GetSupplierByIdAsNoTracking(int id)
         {

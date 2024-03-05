@@ -1,0 +1,32 @@
+﻿@model WepPha2.ViewModels.ChoiseViewModel
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
+</head>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <label>Choose Notification Type:</label>
+            <form asp-action="ChangeNotification" asp-controller="Notification" method="post">
+                <label>Email Notification</label>
+                <input id="email" type="checkbox" name="EmailNotification" asp-for="EmailNotification"/>
+                
+                <label>SMS Notification</label>
+                <input id="sms" type="checkbox" name="SmsNotification" asp-for="SmsNotification"/>
+               <input type="submit" value="choose" class="btn btn-primary" />
+            </form>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-action="Notificate" asp-controller="Notification" method="get">
+                            <button type="submit">Send Notification</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

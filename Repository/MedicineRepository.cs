@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using WepPha2.Data;
 using WepPha2.Interfaces;
 using WepPha2.Models;
@@ -26,6 +27,14 @@ namespace WepPha2.Repository
         public async Task<IEnumerable<Medicine>> GetAll()
         {
             return await _context.Medicines.ToListAsync();
+        }
+
+        public async Task<Medicine> GetSupplierDataByMed(
+            Medicine medicine)
+        {
+            return await _context.Medicines.Where(x=> x.MedicineId==medicine.MedicineId)
+                .Include(x=>x.Supplier)
+                .FirstOrDefaultAsync() ?? null;
         }
         public async Task<Medicine> GetMedicineById(int id)
         {
