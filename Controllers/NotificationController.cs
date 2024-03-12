@@ -9,14 +9,14 @@ public class NotificationController : Controller
 {
     private readonly IMedicineRepository _medicineRepository;
     private readonly NotificationService _notificationService;
-    private readonly IEmailObserver _emailObserver;
-    private readonly ISmsObserver _smsObserver;
+    private readonly EmailObserver _emailObserver;
+    private readonly SmsObserver _smsObserver;
 
     public NotificationController(
         IMedicineRepository medicineRepository,
         NotificationService notificationService,
-        IEmailObserver emailObserver,
-        ISmsObserver smsObserver)
+        EmailObserver emailObserver,
+        SmsObserver smsObserver)
     {
         _medicineRepository = medicineRepository;
         _notificationService = notificationService;

@@ -4,7 +4,7 @@ using WepPha2.Services.SmsSending;
 
 namespace WepPha2.Services;
 
-public class SmsObserver : ISmsObserver
+public class SmsObserver : IObserver
 {
     private readonly SmsService _smsService;
     private readonly IServiceProvider _serviceProvider;

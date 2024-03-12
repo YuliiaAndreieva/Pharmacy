@@ -31,6 +31,4 @@ public class SmsService
             Text = smsData.SmsBody
         });
     }
-
-
 }

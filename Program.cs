@@ -18,8 +18,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<NotificationService>(); 
 builder.Services.AddSingleton<MailService>();
 builder.Services.AddSingleton<SmsService>();
-builder.Services.AddSingleton<IEmailObserver, EmailObserver>();
-builder.Services.AddSingleton<ISmsObserver, SmsObserver>();
+builder.Services.AddSingleton<EmailObserver>();
+builder.Services.AddSingleton<SmsObserver>();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.Configure<SmsSettings>(builder.Configuration.GetSection("SmsSettings"));
 

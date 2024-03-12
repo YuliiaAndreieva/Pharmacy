@@ -34,6 +34,4 @@ public class NotificationService : IObservable
             Notify(medicine);
         }
     }
-
-    
 }

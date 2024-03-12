@@ -6,27 +6,37 @@
     <link rel="stylesheet" href="~/css/style_nav_bar.css" asp-append-version="true" />
 </head>
 
-<div class="container">
+<div class="container-sm bg-light" >
     <div class="row">
         <div class="col-md-12">
             <label>Choose Notification Type:</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
             <form asp-action="ChangeNotification" asp-controller="Notification" method="post">
-                <label>Email Notification</label>
-                <input id="email" type="checkbox" name="EmailNotification" asp-for="EmailNotification"/>
-                
-                <label>SMS Notification</label>
-                <input id="sms" type="checkbox" name="SmsNotification" asp-for="SmsNotification"/>
-               <input type="submit" value="choose" class="btn btn-primary" />
-            </form>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form asp-action="Notificate" asp-controller="Notification" method="get">
-                            <button type="submit">Send Notification</button>
-                        </form>
-                    </div>
+                <div class="form-check">
+                    <input id="email" type="checkbox" name="EmailNotification" asp-for="EmailNotification" class="form-check-input"/>
+                    <label class="form-check-label" for="email">Email Notification</label>
                 </div>
-            </div>
+
+                <div class="form-check">
+                    <input id="sms" type="checkbox" name="SmsNotification" asp-for="SmsNotification" class="form-check-input"/>
+                    <label class="form-check-label" for="sms">SMS Notification</label>
+                </div>
+
+                <input type="submit" value="Choose" class="btn btn-success" />
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <form asp-action="Notificate" asp-controller="Notification" method="get">
+                <button type="submit" class="btn btn-success">Send Notification</button>
+            </form>
         </div>
     </div>
 </div>
+

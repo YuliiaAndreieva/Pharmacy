@@ -7,7 +7,7 @@ using IMailService = MailKit.IMailService;
 
 namespace WepPha2.Services;
 
-public class EmailObserver : IEmailObserver
+public class EmailObserver : IObserver
 {
     private readonly MailService _mailService;
     private readonly IServiceProvider _serviceProvider;
