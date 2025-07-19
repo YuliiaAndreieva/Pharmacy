@@ -24,7 +24,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Api\" />
     <Folder Include="Data\Enum\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="WepPha2.Tests\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="WepPha2.Tests\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="WepPha2.Tests\obj\WepPha2.Tests.csproj.nuget.dgspec.json" />
   </ItemGroup>
 
 </Project>

@@ -17,57 +17,140 @@ namespace WepPha2.Controllers
         private readonly IPurchaseRepository _purchaseRepository;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly UserManager<AppUser> _userManager;
-        //public const string CartSessionKey = "CartId";
+        private readonly ILogger<PurchaseController> _logger;
 
-
-        public PurchaseController(IPurchaseRepository purchaseRepository, UserManager<AppUser> usermanager, IEmployeeRepository employeeRepository)
+        public PurchaseController(IPurchaseRepository purchaseRepository, UserManager<AppUser> usermanager, IEmployeeRepository employeeRepository, ILogger<PurchaseController> logger)
         {
             _purchaseRepository = purchaseRepository;
             _userManager = usermanager;
             _employeeRepository = employeeRepository;
+            _logger = logger;
         }
+
         public async Task<IActionResult> Index()
         {
-            var purchases = await _purchaseRepository.GetAll();
-            return View(purchases);
+            try
+            {
+                var purchases = await _purchaseRepository.GetAll();
+                return View(purchases);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while loading purchases");
+                throw;
+            }
         }
+
         public async Task<IActionResult> Create(double unitPrice)
         {
-            var userEmail = _userManager.GetUserName(User);
-
-            var employe = await _employeeRepository.GetEmployeeByEmail(userEmail);
-
-            if (ModelState.IsValid)
+            try
             {
-                var purchase = new Purchase
+                if (unitPrice <= 0)
                 {
-                    PurchaseDate = DateTime.Now,
-                    EmployeeId = employe.EmployeeId,
-                    UnitPurchasePrice = unitPrice
-                };
-                _purchaseRepository.Add(purchase);
-                return RedirectToAction("Create","PurchaseDetails",new { id = purchase.PurchaseId });
+                    _logger.LogWarning("Invalid unit price provided: {UnitPrice}", unitPrice);
+                    TempData["Error"] = "Invalid unit price. Please provide a valid price.";
+                    return RedirectToAction("Index");
+                }
+
+                var userEmail = _userManager.GetUserName(User);
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    _logger.LogWarning("User not authenticated for purchase creation");
+                    return RedirectToAction("Login", "Account");
+                }
+
+                var employee = await _employeeRepository.GetEmployeeByEmail(userEmail);
+                if (employee == null)
+                {
+                    _logger.LogWarning("Employee not found for email: {Email}", userEmail);
+                    TempData["Error"] = "Employee information not found. Please contact administrator.";
+                    return RedirectToAction("Index");
+                }
+
+                if (ModelState.IsValid)
+                {
+                    var purchase = new Purchase
+                    {
+                        PurchaseDate = DateTime.Now,
+                        EmployeeId = employee.EmployeeId,
+                        UnitPurchasePrice = unitPrice
+                    };
+                    
+                    _purchaseRepository.Add(purchase);
+                    _logger.LogInformation("Purchase created successfully by employee: {EmployeeId}, UnitPrice: {UnitPrice}", employee.EmployeeId, unitPrice);
+                    return RedirectToAction("Create","PurchaseDetails",new { id = purchase.PurchaseId });
+                }
+                else
+                {
+                    _logger.LogWarning("Invalid model state for purchase creation");
+                    TempData["Error"] = "Invalid purchase data. Please try again.";
+                }
+                
+                return RedirectToAction("Index");
             }
-            return View("Index");          
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while creating purchase with unit price: {UnitPrice}", unitPrice);
+                TempData["Error"] = "An error occurred while creating the purchase. Please try again.";
+                return RedirectToAction("Index");
+            }
         }
+
         public async Task<IActionResult> Delete(int id)
         {
-            var purchaseDetails = await _purchaseRepository.GetPurchaseById(id);
-            if (purchaseDetails == null) return View("Error");
-            return View(purchaseDetails);
+            try
+            {
+                if (id <= 0)
+                {
+                    _logger.LogWarning("Invalid purchase ID for delete: {Id}", id);
+                    return NotFound();
+                }
+
+                var purchaseDetails = await _purchaseRepository.GetPurchaseById(id);
+                if (purchaseDetails == null)
+                {
+                    _logger.LogWarning("Purchase not found for delete with ID: {Id}", id);
+                    return NotFound();
+                }
+                
+                return View(purchaseDetails);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while loading delete form for purchase ID: {Id}", id);
+                throw;
+            }
         }
+
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeletePurchase(int id)
         {
-            var purchaseDetails = await _purchaseRepository.GetPurchaseById(id);
-
-            if (purchaseDetails == null)
+            try
             {
-                return View("Error");
+                if (id <= 0)
+                {
+                    _logger.LogWarning("Invalid purchase ID for delete: {Id}", id);
+                    return NotFound();
+                }
+
+                var purchaseDetails = await _purchaseRepository.GetPurchaseById(id);
+                if (purchaseDetails == null)
+                {
+                    _logger.LogWarning("Purchase not found for delete with ID: {Id}", id);
+                    return NotFound();
+                }
+
+                _purchaseRepository.Delete(purchaseDetails);
+                _logger.LogInformation("Purchase deleted successfully: {PurchaseId}", id);
+                return RedirectToAction("Index");
             }
-            _purchaseRepository.Delete(purchaseDetails);
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while deleting purchase with ID: {Id}", id);
+                throw;
+            }
         }
+
         //[HttpGet]
         //public FileStreamResult GetPDF()
         //{
@@ -86,27 +169,25 @@ namespace WepPha2.Controllers
         //            page.Content()
         //                .PaddingVertical(1, Unit.Centimetre)
         //                .Column(x =>
-        //                {
-        //                    x.Spacing(20);
+        //            {
+        //                x.Spacing(20);
 
-        //                    x.Item().Text(Placeholders.LoremIpsum());
-        //                    x.Item().Image(Placeholders.Image(200, 100));
-        //                });
+        //                x.Item().Text(Placeholders.LoremIpsum());
+        //                x.Item().Image(Placeholders.Image(200, 100));
+        //            });
 
         //            page.Footer()
         //                .AlignCenter()
         //                .Text(x =>
-        //                {
-        //                    x.Span("Page ");
-        //                    x.CurrentPageNumber();
-        //                });
+        //            {
+        //                x.Span("Page ");
+        //                x.CurrentPageNumber();
+        //            });
         //        });
         //    });
         //    byte[] pdfBytes = document.GeneratePdf();
         //    MemoryStream ms = new MemoryStream(pdfBytes);
         //    return new FileStreamResult(ms, "application/pdf");
-
         //}
-
     }
 }

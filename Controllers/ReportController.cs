@@ -16,6 +16,7 @@ namespace WepPha2.Controllers
         private readonly IMedicineRepository _medicineRepository;
         private readonly IPurchaseRepository _purchaseRepository;
         private readonly IEmployeeRepository _employeeRepository;
+        
         public ReportController(IMedicineRepository medicineRepository, 
             IPurchaseRepository purchaseRepository,
             IEmployeeRepository employeeRepository)
@@ -24,11 +25,16 @@ namespace WepPha2.Controllers
             _purchaseRepository = purchaseRepository;
             _employeeRepository = employeeRepository;
         }
+
+        // Conventional route - handled by default route
         public IActionResult Index()
         {
             return View();
         }
-        public async Task<IActionResult> CreateMedicineReport() 
+
+        // Attribute route with optional parameter and default value
+        [Route("Reports/Medicine/{format?}")]
+        public async Task<IActionResult> CreateMedicineReport(string format = "pdf") 
         {
             var medicines = await _medicineRepository.GetAll();  
             var document = new InvoiceMedicineDocument(medicines);
@@ -36,6 +42,7 @@ namespace WepPha2.Controllers
             string nameOfFile = $"MedicineReport{DateTime.Now}.pdf";
             return File(pdfBytes, "application/pdf", nameOfFile);
         }
+
         public async Task<IActionResult> CreatePurchaseReport()
         {
             var purchases = await _purchaseRepository.GetAll();
@@ -44,6 +51,7 @@ namespace WepPha2.Controllers
             string nameOfFile = $"PurchaseReport{DateTime.Now}.pdf";
             return File(pdfBytes, "application/pdf", nameOfFile);
         }
+
         public async Task<IActionResult> CreateEmployeeReport()
         {
             var employees = await _employeeRepository.GetAll();
